@@ -23,9 +23,9 @@ class TauBenchBenchmark(BaseBenchmark):
             self.benchmark = {str(task_index): {
                 'env': 'retail',
                 'user_strategy': 'llm',
-                'user_model': 'gpt-4o',
+                'user_model': 'us.amazon.nova-micro-v1:0',
                 'task_split': 'test',
-                'user_provider': 'openai',
+                'user_provider': 'bedrock',
                 'task_index': task_index,
             } for task_index in range(115)}
         elif self.split == 'airline':
