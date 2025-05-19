@@ -454,6 +454,17 @@ hal-eval --benchmark usaco \
   --max_concurrent 10
 ```
 
+5. **Running TAU-Bench with Amazon Bedrock models:**
+```bash
+hal-eval --benchmark taubench_retail \
+    --agent_dir agents/taubench_tool_calling/ \
+    --agent_function tool_calling.run \
+    --agent_name "TAU-Bench Solver (Amazon Nova Micro)" \
+    -A model_name=us.amazon.nova-micro-v1:0 \
+    -A provider=bedrock \
+    --max_concurrent 1
+```
+
 More details on how to run the Amazon Bedrock models can be found [here](agents/RUN_AGENTS.md).
 
 Available Bedrock models and their corresponding prompt templates:
