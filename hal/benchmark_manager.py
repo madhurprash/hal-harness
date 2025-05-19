@@ -12,10 +12,15 @@ import os
 
 
 class BenchmarkManager:
+    """
+    This benchmark manager class serves as a factory and registry for different benchmark 
+    types, working hand in hadn with the Agent Runner
+    """
     def __init__(self, agent_dir: str = 'agent/', config: Optional[Dict[str, Any]] = {}, agent_args: Optional[Dict[str, Any]] = {}):
         self.config = config
         self.agent_dir = agent_dir
         self.agent_args = agent_args
+        # These are the list of benchmarks supported by HAL today
         self.benchmarks = ['scicode',
                            'scicode_easy',
                            'scicode_hard',
@@ -65,7 +70,8 @@ class BenchmarkManager:
             benchmark = AppWorldBenchmark(self.agent_dir, self.config, benchmark_name)
         elif benchmark_name in ['taubench_retail', 'taubench_airline']:
             from .benchmarks.taubench import TauBenchBenchmark
-            benchmark = TauBenchBenchmark(self.agent_dir, self.config, benchmark_name)
+            # Provide the agent arguments if this is being run using a model on Amazon Bedrock
+            benchmark = TauBenchBenchmark(self.agent_dir, self.config, benchmark_name, self.agent_args)
         elif benchmark_name == 'gaia':
             from .benchmarks.gaia import GaiaBenchmark
             benchmark = GaiaBenchmark(self.agent_dir, self.config, benchmark_name)

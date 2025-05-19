@@ -50,7 +50,7 @@ class AgentRunner:
             raise ValueError("Only one of conda_env, use_vm, or use_docker can be set at a time.")
         
         # Initialize benchmark first
-        self.benchmark_manager = BenchmarkManager(agent_dir, config)
+        self.benchmark_manager = BenchmarkManager(agent_dir, config, agent_args)
         self.benchmark = self.benchmark_manager.get_benchmark(benchmark_name)
         self.benchmark.agent_args = agent_args
         
